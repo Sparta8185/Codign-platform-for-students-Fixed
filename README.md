@@ -3,8 +3,7 @@
 This project is a web-based platform designed to allow students to write, compile, and run C programs directly from their browser. The platform is built using Flask for the backend, with a frontend code editor powered by CodeMirror. Additionally, the platform includes a PDF viewer and a user management interface for lab sessions.
 
 
-<img width="1470" alt="Screenshot 2024-08-13 at 09 31 01" src="https://github.com/user-attachments/assets/a4f90170-6751-4fdf-85be-e7eee80c0369">
-
+<img width="1351" alt="Screenshot 2024-08-13 at 09 32 02" src="https://github.com/user-attachments/assets/1f70faf7-0a3e-4c6d-97cd-842d2b08d558">
 
 
 ## Features
