@@ -83,7 +83,7 @@ sudo apt-get install gcc
 
 - The platform is designed to run locally, and no login is required for users.
 - The initial C program loaded into the editor is a simple "Hello, World!" program.
-- The right side of the page displays a PDF document, and the signature "Created by Res. Asst. Okan DÜZYEL, Dept. of Electrical and Electronics Engineering".
+- The right side of the page displays a PDF document, and the signatured "Created by Res. Asst. Okan DÜZYEL, Dept. of Electrical and Electronics Engineering".
 
 ## License
 
