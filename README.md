@@ -2,9 +2,7 @@
 
 This project is a web-based platform that allows students to write, compile, and run C programs directly from their browsers. Additionally, the platform includes a PDF viewer and a user management interface for lab sessions. 
 
-
-<img width="1351" alt="Screenshot 2024-08-13 at 09 32 02" src="https://github.com/user-attachments/assets/1f70faf7-0a3e-4c6d-97cd-842d2b08d558">
-
+<img width="1344" alt="Screenshot 2024-08-13 at 22 44 11" src="https://github.com/user-attachments/assets/b086f912-7f03-4561-b349-59a67db39dec">
 
 ## Features
 
