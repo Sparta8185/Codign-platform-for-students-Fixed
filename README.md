@@ -1,6 +1,6 @@
 # Codign-platform-for-students
 
-This project is a web-based platform that allows students to write, compile, and run C programs directly from their browsers. Additionally, the platform includes a PDF viewer and a user management interface for lab sessions.
+This project is a web-based platform that allows students to write, compile, and run C programs directly from their browsers. Additionally, the platform includes a PDF viewer and a user management interface for lab sessions. 
 
 
 <img width="1351" alt="Screenshot 2024-08-13 at 09 32 02" src="https://github.com/user-attachments/assets/1f70faf7-0a3e-4c6d-97cd-842d2b08d558">
