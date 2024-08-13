@@ -47,10 +47,6 @@ sudo apt-get install gcc
 - **Windows**:
 - Install [MinGW](http://www.mingw.org/) or use the Windows Subsystem for Linux (WSL) to get a Unix-like environment.
 
-### HTML and JavaScript Libraries
-- **CodeMirror**: Used for the code editor with syntax highlighting.
-- **PDF.js**: Used to render the PDF document in the viewer.
-
 ### Static Files
 - **iyteicon.png**: Icon for the webpage.
 - **sample.pdf**: PDF document to be displayed on the right side of the page.
