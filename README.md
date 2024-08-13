@@ -10,6 +10,9 @@ This project is a web-based platform that allows students to write, compile, and
 - **Input/Output Areas**: Separate areas for entering input and displaying the C program output.
 - **PDF Viewer**: Displays a PDF document on the right side of the page, with an aligned signature at the bottom right.
 - **User Management**: Admin interface to manage users, track their connection status, and control lab sessions.
+- Save and Open Features:
+    - Save Feature: Allows users to save their code as a .c file, ensuring that their work is preserved and can be accessed later.
+    - Open Feature: Enables users to load previously saved .c files into the code editor, allowing them to continue working on their code from where they left off.
 
 ## Requirements
 
