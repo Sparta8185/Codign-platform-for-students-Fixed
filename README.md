@@ -1,6 +1,6 @@
 # Codign-platform-for-students
 
-This project is a web-based platform designed to allow students to write, compile, and run C programs directly from their browser. The platform is built using Flask for the backend, with a frontend code editor powered by CodeMirror. Additionally, the platform includes a PDF viewer and a user management interface for lab sessions.
+This project is a web-based platform that allows students to write, compile, and run C programs directly from their browsers. Additionally, the platform includes a PDF viewer and a user management interface for lab sessions.
 
 
 <img width="1351" alt="Screenshot 2024-08-13 at 09 32 02" src="https://github.com/user-attachments/assets/1f70faf7-0a3e-4c6d-97cd-842d2b08d558">
@@ -9,7 +9,7 @@ This project is a web-based platform designed to allow students to write, compil
 ## Features
 
 - **Code Editor**: An integrated code editor with syntax highlighting, using CodeMirror. The editor is pre-loaded with a simple "Hello, World!" C program.
-- **Input/Output Areas**: Separate areas for entering input and displaying the output of the C program.
+- **Input/Output Areas**: Separate areas for entering input and displaying the C program output.
 - **PDF Viewer**: Displays a PDF document on the right side of the page, with an aligned signature at the bottom right.
 - **User Management**: Admin interface to manage users, track their connection status, and control lab sessions.
 
@@ -83,7 +83,7 @@ sudo apt-get install gcc
 
 - The platform is designed to run locally, and no login is required for users.
 - The initial C program loaded into the editor is a simple "Hello, World!" program.
-- The right side of the page displays a PDF document, and the signatured "Created by Res. Asst. Okan DÜZYEL, Dept. of Electrical and Electronics Engineering".
+- The right side of the page displays a PDF document, and the signature "Created by Res. Asst. Okan DÜZYEL, Dept. of Electrical and Electronics Engineering".
 
 ## License
 
