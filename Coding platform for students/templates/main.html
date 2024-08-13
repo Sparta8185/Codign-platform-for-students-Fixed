@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coding Platform</title>
+    <link rel="icon" href="static/iyteicon.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/theme/material.css">
+    <style>
+        body {
+            display: flex;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+        .left-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 10px;
+            box-sizing: border-box;
+            min-width: 0;
+        }
+        .right-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+        .CodeMirror {
+            height: 100%;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            overflow: auto;
+        }
+        #code-editor {
+            flex: 1;
+            min-height: 300px;
+            max-height: 100%;
+            margin-bottom: 10px;
+        }
+        #input-area {
+            height: 40px;
+            margin-bottom: 10px;
+        }
+        .output-area {
+            height: 100px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 16px;
+            padding: 10px;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+            overflow-y: auto;
+        }
+        button {
+            padding: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-right: 5px;
+        }
+        .button-group {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start; /* Align buttons to the start */
+        }
+        .button-group button {
+            margin-right: 5px;
+        }
+        #run-button {
+            width: 50%;
+            flex: 1; /* Allow the button to grow if needed */
+            min-width: 150px; /* Minimum width to ensure usability */
+            box-sizing: border-box; /* Include padding and border in the element’s total width */
+        }
+        iframe {
+            width: 100%;
+            height: calc(100% - 30px); /* Adjust for signature space */
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        #signature {
+            text-align: right;
+            font-size: 12px;
+            color: #555;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="left-area">
+        <div id="code-editor"></div>
+        <textarea id="input-area" placeholder="Enter input values (separated by new lines)" class="output-area"></textarea>
+        <textarea id="output-area" class="output-area" readonly></textarea>
+        <div class="button-group">
+            <button id="run-button">Run Code</button>
+            <button id="open-button">Open</button>
+            <button id="save-button">Save</button>
+        </div>
+    </div>
+    <div class="right-area">
+        <iframe src="static/sample.pdf"></iframe>
+        <div id="signature">
+            Created by Res. Asst. Okan DÜZYEL<br>
+            Dept. of Electrical and Electronics Engineering
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/mode/clike/clike.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/addon/edit/matchbrackets.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/addon/edit/closebrackets.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/addon/edit/formatting.min.js"></script>
+
+    <script>
+        // Initialize CodeMirror editor
+        const codeMirrorEditor = CodeMirror(document.getElementById('code-editor'), {
+            mode: 'text/x-csrc',
+            theme: 'material',
+            lineNumbers: true,
+            matchBrackets: true,
+            autoCloseBrackets: true,
+            tabSize: 4,
+            indentUnit: 4,
+            value: `#include <stdio.h>\nint main() {\n   // printf() displays the string inside quotation\n   printf("Hello, World!");\n   return 0;\n}`
+        });
+
+        document.getElementById('run-button').addEventListener('click', function() {
+            const code = codeMirrorEditor.getValue();
+            const inputValues = document.getElementById('input-area').value;
+
+            fetch('/run_code', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ code: code, input: inputValues }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.output) {
+                    document.getElementById('output-area').value = data.output;
+                } else {
+                    document.getElementById('output-area').value = 'No output received.';
+                }
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                document.getElementById('output-area').value = 'An error occurred while running the code.';
+            });
+        });
+
+        document.getElementById('open-button').addEventListener('click', function() {
+            const filename = prompt("Enter the name of the file to open:");
+            if (filename) {
+                fetch(`/open_file?filename=${filename}`)
+                    .then(response => response.text())
+                    .then(data => {
+                        codeMirrorEditor.setValue(data);
+                    })
+                    .catch((error) => {
+                        console.error('Error:', error);
+                        alert('An error occurred while opening the file.');
+                    });
+            }
+        });
+
+        document.getElementById('save-button').addEventListener('click', function() {
+            const filename = prompt("Enter the name to save the file as:");
+            if (filename) {
+                const code = codeMirrorEditor.getValue();
+                fetch('/save_file', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ filename: filename, code: code }),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.message);
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                    alert('An error occurred while saving the file.');
+                });
+            }
+        });
+
+        // Disable copy, paste, and cut
+        document.addEventListener('copy', (e) => e.preventDefault());
+        document.addEventListener('paste', (e) => e.preventDefault());
+        document.addEventListener('cut', (e) => e.preventDefault());
+
+        // Disable right-click context menu
+        document.addEventListener('contextmenu', (e) => e.preventDefault());
+
+        // Disable Ctrl+C, Ctrl+V, and Ctrl+X
+        document.addEventListener('keydown', function(event) {
+            if ((event.ctrlKey || event.metaKey) && (event.key === 'c' || event.key === 'v' || event.key === 'x')) {
+                event.preventDefault();
+            }
+        });
+    </script>
+</body>
+</html>
