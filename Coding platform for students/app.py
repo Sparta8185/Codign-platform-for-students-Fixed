@@ -19,8 +19,8 @@ def run_code():
         f.write(code)
 
     try:
-        subprocess.run(['gcc', 'temp.c', '-o', 'temp'], check=True)
-        result = subprocess.run(['./temp'], input=input_values, text=True, capture_output=True, check=True)
+        subprocess.run(['gcc', 'temp.c', '-o', 'temp.exe'], check=True)
+        result = subprocess.run(['./temp.exe'], input=input_values, text=True, capture_output=True, check=True)
         output = result.stdout
     except subprocess.CalledProcessError as e:
         output = e.stderr or str(e)
